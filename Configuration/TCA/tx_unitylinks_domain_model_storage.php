@@ -4,30 +4,23 @@ defined('TYPO3') or die('Access denied.');
 
 return [
     'ctrl' => [
-        'title' => 'Settings',
+        'title' => 'Storage',
         'label' => 'name',
         'sortby' => 'sorting',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
-        'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
         'enablecolumns' => [
             'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
         ],
         'typeicon_classes' => [
             'default' => 'actions-check'
         ],
         'searchFields' => 'uid, name, links',
-    ],
-    'interface' => [
-        'showRecordFieldList' => '
-            hidden,
-            name,
-            description,
-            links
-        ',
     ],
     'columns' => [
         'hidden' => [
@@ -38,15 +31,15 @@ return [
                 'default' => 0,
             ],
         ],
-//        'name' => [
-//            'label' => 'Name',
-//            'config' => [
-//                'type' => 'input',
-//                'max' => 50,
-//                'required' => true
-//            ],
-//        ],
         'name' => [
+            'label' => 'Name',
+            'config' => [
+                'type' => 'input',
+                'max' => 50,
+                'required' => true
+            ],
+        ],
+        'slug' => [
             'label' => 'Slug',
             'config' => [
                 'type' => 'slug',
@@ -74,14 +67,36 @@ return [
             'config' => [
                 'type' => 'file',
                 'allowed' => 'common-media-types',
-                'maxitems' => 6,
+                'maxitems' => 1,
+            ],
+        ],
+        'header_image' => [
+            'label' => 'Header Image',
+            'config' => [
+                'type' => 'file',
+                'allowed' => 'common-media-types',
+                'maxitems' => 1,
             ],
         ],
         'user' => [
             'label' => 'User',
             'config' => [
-                'type' => 'input',
-                'max' => 255,
+                'type' => 'group',
+                'allowed' => 'fe_users',
+                'maxitems' => 1,
+                'minitems' => 0,
+                'size' => 1,
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                    'listModule' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
         ],
         'links' => [
@@ -95,11 +110,12 @@ return [
         0 => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                    hidden,
                     name,
+                    slug,
                     user,
                     description,
                     profile_image,
+                    header_image,
                     links,
             ',
         ],
