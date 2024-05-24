@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center align-items-center h-100" style="align-items: center;">
+<div class="card glow" style="width: 100%">
+    <div class="card-header">
+        <h3>Setings / Setup</h3>
+    </div>
+    <div class="card-body card-overflow">
+        <div class="overflow-scroll">
+            <f:form action="add" name="setting" object="{setting}" arguments="{setting: setting}" enctype="multipart/form-data">
+
+                <f:form.hidden property="user" value="{userUid}" />
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Enter Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3">/lux-arcadia.de/linktree/</span>
+                        <f:form.textfield property="name" id="name" class="form-control" value="{setting.name}" />
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <label for="description" class="form-label">Enter Description off your Profile</label>
+                    <f:form.textarea property="description" id="description" class="form-control" rows="3" value="{setting.description}" />
+                </div>
+
+                <!--f:image image="{setting.profileImage}" /-->
+                <div class="mt-2">
+                    <label class="form-label" for="profileImage">Upload Image</label>
+                    <input type="file" name="file" id="profileImage" class="form-control" value="" />
+                </div>
+
+                <div id="formContainer">
+                    <div class="card card-body mt-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <h2>add Link</h2>
+                            </div>
+                            <div class="col-9"></div>
+                            <div class="col-1">
+                                <button style="margin-left: auto; margin-right: auto;" type="button" class="btn btn-danger" onclick="removeCard(this)"><i class="fa-regular fa-trash-can fa-lg" style="color: #ffffff;"></i></button>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="title0" class="form-label">Enter Title</label>
+                            <f:form.textfield name="title[]" id="title0" class="form-control" value="{setting.links.title.0}" />
+                        </div>
+                        <div class="mt-2">
+                            <label for="url0" class="form-label">Enter Link</label>
+                            <f:form.textfield type="url" name="url[]" id="url0" class="form-control" value="{setting.links.url.0}" />
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" onclick="addCard()">add Link</button>
+
+                <script>
+                    let cardCount = 1;
+
+                    function addCard() {
+                        const formContainer = document.getElementById('formContainer');
+
+                        const newCard = document.createElement('div');
+                        newCard.className = 'card card-body mt-2';
+                        newCard.innerHTML = `
+                    <h2>add Second Link</h2>
+                    <div>
+                        <label for="title${cardCount}" class="form-label">Enter Title</label>
+                        <f:form.textfield name="title[]" id="title${cardCount}" class="form-control" value="{setting.links.title.${cardCount}}" />
+                    </div>
+                    <div class="mt-2">
+                        <label for="url${cardCount}" class="form-label">Enter Link</label>
+                        <f:form.textfield type="url" name="url[]" id="url${cardCount}" class="form-control" value="{setting.links.url.${cardCount}}" />
+                        <button type="button" class="btn btn-danger" onclick="removeCard(this)">Delete</button>
+                    </div>
+                `;
+
+                        formContainer.appendChild(newCard);
+                        cardCount++;
+                    }
+
+                    function removeCard(button) {
+                        const cardToRemove = button.closest('.card');
+                        cardToRemove.remove();
+                    }
+                </script>
+
+                <div class="mt-2">
+                    <f:form.submit class="btn btn-primary" value="Send" />
+                </div>
+
+            </f:form>
+        </div>
+    </div>
+</div>
+</div>

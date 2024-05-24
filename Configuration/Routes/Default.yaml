@@ -1,0 +1,24 @@
+routeEnhancers:
+    SettingPlugin:
+        type: Extbase
+        limitToPages:
+            - 9
+        extension: UnityLinks
+        plugin: Settings
+        routes:
+            -   routePath: '/'
+                _controller: 'Settings::addForm'
+            -   routePath: '/{setting}/add'
+                _controller: 'Settings::add'
+                _arguments:
+                    setting: setting
+            -   routePath: '/{setting}/show'
+                _controller: 'Settings::show'
+                _arguments:
+                    setting: setting
+        defaultController: 'Settings::addForm'
+        aspects:
+            setting:
+                type: PersistedAliasMapper
+                tableName: tx_unitylinks_domain_model_setting
+                routeFieldName: name
