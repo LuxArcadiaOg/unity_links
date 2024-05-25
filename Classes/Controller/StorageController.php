@@ -2,8 +2,8 @@
 
 namespace Arcadia\UnityLinks\Controller;
 
-use Arcadia\UnityLinks\Domain\Model\Setting;
-use Arcadia\UnityLinks\Domain\Repository\SettingRepository;
+use Arcadia\UnityLinks\Domain\Model\Storage;
+use Arcadia\UnityLinks\Domain\Repository\StorageRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\Exception\AspectNotFoundException;
@@ -18,19 +18,19 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 
-class SettingsController extends ActionController
+class StorageController extends ActionController
 {
     /**
      * @param ResourceFactory $resourceFactory
-     * @param SettingRepository $settingRepository
+     * @param StorageRepository $storageRepository
      * @param PersistenceManager $persistenceManager
      * @param Context $context
      */
     public function __construct(
-        private readonly ResourceFactory $resourceFactory,
-        private readonly SettingRepository $settingRepository,
+        private readonly ResourceFactory    $resourceFactory,
+        private readonly StorageRepository  $storageRepository,
         private readonly PersistenceManager $persistenceManager,
-        private readonly Context $context
+        private readonly Context            $context
     ) {}
 
     /**
@@ -38,15 +38,15 @@ class SettingsController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        $this->view->assign('settings', $this->settingRepository->findAll());
+        $this->view->assign('settings', $this->storageRepository->findAll());
         return $this->htmlResponse();
     }
 
     /**
-     * @param Setting $setting
+     * @param Storage $setting
      * @return ResponseInterface
      */
-    public function showAction(Setting $setting): ResponseInterface
+    public function showAction(Storage $setting): ResponseInterface
     {
         $this->view->assign('setting', $setting);
         return $this->htmlResponse();
@@ -59,7 +59,7 @@ class SettingsController extends ActionController
     public function addFormAction(): ResponseInterface
     {
         $userUid = $this->context->getPropertyFromAspect('frontend.user', 'id');
-        $setting = $this->settingRepository->findOneByUser($userUid);
+        $setting = $this->storageRepository->findOneByUser($userUid);
 
         $this->view->assign('userUid', $userUid);
         $this->view->assign('setting', $setting);
@@ -68,13 +68,13 @@ class SettingsController extends ActionController
     }
 
     /**
-     * @param Setting $setting
+     * @param Storage $setting
      * @return ResponseInterface
      * @throws ExistingTargetFileNameException
      * @throws IllegalObjectTypeException
      * @throws InsufficientFolderAccessPermissionsException
      */
-    public function addAction(Setting $setting): ResponseInterface
+    public function addAction(Storage $setting): ResponseInterface
     {
         $originalFilePath = $_FILES['file']['tmp_name'];
         $newFileName = $_FILES['file']['name'];

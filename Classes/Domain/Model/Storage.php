@@ -6,14 +6,10 @@ use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-class Setting extends AbstractEntity
+class Storage extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected string $title = '';
-
     /**
      * @var string
      */
@@ -22,7 +18,12 @@ class Setting extends AbstractEntity
     /**
      * @var string
      */
-    protected string $links = '';
+    protected string $slug = '';
+
+    /**
+     * @var ObjectStorage<Link>
+     */
+    protected ObjectStorage $links;
 
     /**
      * @var string
@@ -43,43 +44,52 @@ class Setting extends AbstractEntity
     /**
      * @return string
      */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
     public function getName(): string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return void
+     */
     public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getLinks(): array
+    public function getSlug(): string
     {
-        return unserialize($this->links) ? unserialize($this->links) : [];
+        return $this->slug;
     }
 
     /**
-     * @param array $links
+     * @param string $slug
+     * @return void
      */
-    public function setLinks(array $links): void
+    public function setSlug(string $slug): void
     {
-        $this->links = serialize($links);
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return ObjectStorage
+     */
+    public function getLinks(): ObjectStorage
+    {
+        return $this->links;
+    }
+
+    /**
+     * @param ObjectStorage<Link> $links
+     * @return void
+     */
+    public function setLinks(ObjectStorage $links): void
+    {
+        $this->links = $links;
     }
 
     /**

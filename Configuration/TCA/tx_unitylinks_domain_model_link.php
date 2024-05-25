@@ -20,61 +20,31 @@ return [
         'typeicon_classes' => [
             'default' => 'actions-check'
         ],
-        'searchFields' => 'uid, name, links',
+        'searchFields' => 'uid, title, links',
     ],
     'columns' => [
-        'hidden' => [
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-                'renderType' => 'checkboxToggle',
-                'default' => 0,
-            ],
-        ],
-        'name' => [
-            'label' => 'Name',
+        'title' => [
+            'label' => 'Titel',
             'config' => [
                 'type' => 'input',
-                'max' => 50,
+                'max' => 255,
                 'required' => true
             ],
         ],
-        'slug' => [
-            'label' => 'Slug',
+        'href' => [
+            'label' => 'href',
             'config' => [
-                'type' => 'slug',
-                'size' => 50,
-                'generatorOptions' => [
-                    'fields' => [
-                        'pid',
-                    ],
-                    'fieldSeparator' => '/',
-                    'prefixParentPageSlug' => true,
-                ],
-                'fallbackCharacter' => '-',
-                'eval' => 'uniqueInSite',
-                'default' => '',
+                'type' => 'input',
+                'max' => 255,
+                'required' => true
             ],
         ],
         'storage' => [
             'label' => 'Storage',
             'config' => [
-                'type' => 'group',
-                'allowed' => 'fe_users',
-                'maxitems' => 1,
-                'minitems' => 0,
-                'size' => 1,
-                'fieldControl' => [
-                    'editPopup' => [
-                        'disabled' => false,
-                    ],
-                    'addRecord' => [
-                        'disabled' => false,
-                    ],
-                    'listModule' => [
-                        'disabled' => false,
-                    ],
-                ],
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'foreign_table' => 'tx_unitylinks_domain_model_storage',
             ],
         ],
     ],
@@ -82,13 +52,9 @@ return [
         0 => [
             'showitem' => '
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-                    name,
-                    slug,
-                    user,
-                    description,
-                    profile_image,
-                    header_image,
-                    links,
+                    title,
+                    href,
+                    storage,
             ',
         ],
     ],

@@ -7,7 +7,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-class SettingRepository extends Repository
+class StorageRepository extends Repository
 {
     /**
      * @var array
@@ -24,7 +24,7 @@ class SettingRepository extends Repository
 
         $querySettings
             ->setRespectStoragePage(true)
-            ->setStoragePageIds([14]);
+            ->setStoragePageIds([42]);
 
         $this->setDefaultQuerySettings($querySettings);
     }

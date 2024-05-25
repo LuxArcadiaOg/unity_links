@@ -23,14 +23,6 @@ return [
         'searchFields' => 'uid, name, links',
     ],
     'columns' => [
-        'hidden' => [
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-                'renderType' => 'checkboxToggle',
-                'default' => 0,
-            ],
-        ],
         'name' => [
             'label' => 'Name',
             'config' => [
@@ -102,7 +94,9 @@ return [
         'links' => [
             'label' => 'Links',
             'config' => [
-                'type' => 'text',
+                'type' => 'inline',
+                'foreign_table' => 'tx_unitylinks_domain_model_link',
+                'foreign_field' => 'storage'
             ],
         ],
     ],
