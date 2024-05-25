@@ -8,6 +8,11 @@
 </div>
 <ul>
     <f:for as="storage" each="{storages}">
-        <li><f:link.action action="show" arguments="{storage: storage}">{storage.name}</f:link.action></li>
+        <li>
+            {storage.name}&nbsp;
+            <f:link.action action="show" arguments="{storage: storage}">Show</f:link.action>
+            <f:link.action action="addForm" arguments="{storage: storage}">Edit</f:link.action>
+            <f:link.action action="dalete" arguments="{storage: storage}">Delete</f:link.action>
+        </li>
     </f:for>
 </ul>

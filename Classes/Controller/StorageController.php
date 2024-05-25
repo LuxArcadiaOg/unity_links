@@ -59,10 +59,9 @@ class StorageController extends ActionController
     public function addFormAction(): ResponseInterface
     {
         $userUid = $this->context->getPropertyFromAspect('frontend.user', 'id');
-        $setting = $this->storageRepository->findOneByUser($userUid);
-
+        $storage = $this->storageRepository->findOneByUser($userUid);
         $this->view->assign('userUid', $userUid);
-        $this->view->assign('setting', $setting);
+        $this->view->assign('storage', $storage);
 
         return $this->htmlResponse();
     }
