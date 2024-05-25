@@ -1,6 +1,13 @@
-<f:debug>{_all}</f:debug>
+<div class="row mt-1">
+    <div class="col-sm-8">
+        <h2>Your UnityLinks</h2>
+    </div>
+    <div class="col-sm-4">
+        <f:link.action action="addForm" class="btn btn-danger">Create</f:link.action>
+    </div>
+</div>
 <ul>
-    <f:for as="setting" each="{settings}">
-        <li><f:link.action pageUid="9" action="show" arguments="{setting: setting}">{setting.title}</f:link.action></li>
+    <f:for as="storage" each="{storages}">
+        <li><f:link.action action="show" arguments="{storage: storage}">{storage.name}</f:link.action></li>
     </f:for>
 </ul>

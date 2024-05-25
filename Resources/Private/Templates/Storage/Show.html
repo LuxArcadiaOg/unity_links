@@ -3,15 +3,14 @@
         <img src="/typo3conf/ext/template/Resources/Public/Images/CardImages/Discord-server-neon-logo.png"
              class="card-img-top tree-image" style="border-top-left-radius: 30px; border-top-right-radius: 30px;"
              alt="...">
-        <f:image image="{setting.profileImage}" class="tree-profil img-thumbnail" />
         <div class="card-body text-center">
             <br>
             <br>
-            <h2 class="card-title mt-2">{setting.name}</h2>
-            <h6 class="card-subtitle mb-2 text-body-secondary">{setting.description}</h6>
-            <f:for as="url" each="{setting.links.url}" iteration="iterator">
+            <h2 class="card-title mt-2">{storage.name}</h2>
+            <h6 class="card-subtitle mb-2 text-body-secondary">{storage.description}</h6>
+            <f:for as="link" each="{storage.links}" iteration="iterator">
                 <div style="color: White;" class="mt-2">
-                    <a href="{url}" class="btn btn-secondary mt-2 glow" style="width:100%; border-radius: 20px;">{setting.links.title.{iterator.index}}</a>
+                    <a href="{link.href}" class="btn btn-secondary mt-2 glow" style="width:100%; border-radius: 20px;">{link.title}</a>
                 </div>
             </f:for>
             <a class="mt-2" href="https://lux-arcadia.de/login">

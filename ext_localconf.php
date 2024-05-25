@@ -9,9 +9,9 @@ ExtensionUtility::configurePlugin(
    'UnityLinks',
    'Storage',
     [
-        StorageController::class => 'addForm, list, show, add',
+        StorageController::class => 'list, addForm, show, add',
     ],
     [
-        StorageController::class => 'addForm, list, show, add',
+        StorageController::class => 'list, addForm, show, add',
     ]
 );

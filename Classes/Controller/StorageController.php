@@ -38,17 +38,17 @@ class StorageController extends ActionController
      */
     public function listAction(): ResponseInterface
     {
-        $this->view->assign('settings', $this->storageRepository->findAll());
+        $this->view->assign('storages', $this->storageRepository->findAll());
         return $this->htmlResponse();
     }
 
     /**
-     * @param Storage $setting
+     * @param Storage $storage
      * @return ResponseInterface
      */
-    public function showAction(Storage $setting): ResponseInterface
+    public function showAction(Storage $storage): ResponseInterface
     {
-        $this->view->assign('setting', $setting);
+        $this->view->assign('storage', $storage);
         return $this->htmlResponse();
     }
 
